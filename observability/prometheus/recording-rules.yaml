@@ -1,0 +1,7 @@
+groups:
+  - name: platform-observability-recordings
+    interval: 30s
+    rules:
+      - record: platform:scrape_target:up_ratio
+        expr: avg by (job) (up)
+        
