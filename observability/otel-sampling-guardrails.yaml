@@ -1,0 +1,7 @@
+processors:
+  probabilistic_sampler:
+    sampling_percentage: 25
+  batch:
+    send_batch_size: 512
+    timeout: 5s
+    
