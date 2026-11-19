@@ -1,0 +1,18 @@
+apiVersion: platform.gitops.io/v1alpha1
+kind: MultiClusterPromotionConfig
+metadata:
+  name: global-platform-multi-cluster-promotion
+spec:
+  promotionFlow:
+    - source: dev
+      target: staging
+      requiresSignedArtifact: true
+    - source: staging
+      target: prod
+      requiresSignedArtifact: true
+      requiresApproval: true
+  clusters:
+    - eks
+    - aks
+    - gke
+    
