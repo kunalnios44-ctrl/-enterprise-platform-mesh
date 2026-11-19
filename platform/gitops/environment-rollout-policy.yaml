@@ -1,0 +1,22 @@
+apiVersion: platform.gitops.io/v1alpha1
+kind: EnvironmentRolloutPolicy
+metadata:
+  name: global-platform-gitops-rollout-policy
+spec:
+  environments:
+    dev:
+      autoSync: true
+      selfHeal: true
+      prune: true
+    staging:
+      autoSync: true
+      selfHeal: true
+      prune: false
+    prod:
+      autoSync: false
+      selfHeal: true
+      prune: false
+  rollback:
+    automaticOnHealthDegraded: true
+    maxRevisionHistory: 10
+    
