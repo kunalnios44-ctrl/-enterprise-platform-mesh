@@ -1,0 +1,11 @@
+{
+  "platform": "global-platform-engineering",
+  "rpoMinutes": 15,
+  "rtoMinutes": 30,
+  "snapshotVerificationEnabled": true,
+  "supportedClouds": [
+    "aws",
+    "azure",
+    "gcp"
+  ]
+}
