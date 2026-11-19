@@ -1,0 +1,20 @@
+apiVersion: platform.security.io/v1alpha1
+kind: KubernetesRuntimeGuardrails
+metadata:
+  name: global-platform-k8s-runtime-guardrails
+spec:
+  podSecurity:
+    podSecurityStandard: restricted
+    allowPrivilegedContainers: false
+    allowHostNetwork: false
+    allowHostPid: false
+    runAsNonRootRequired: true
+  networkPolicies:
+    defaultDenyIngress: true
+    defaultDenyEgress: false
+    allowDnsAndObservabilityEgress: true
+  targetClusters:
+    - eks
+    - aks
+    - gke
+    
