@@ -1,0 +1,14 @@
+apiVersion: platform.security.io/v1alpha1
+kind: SupplyChainAttestationPolicy
+metadata:
+  name: global-platform-supply-chain-attestation
+spec:
+  cosign:
+    signatureRequired: true
+    oidcIdentityVerification: true
+  trivy:
+    blockCriticalVulnerabilities: true
+    blockHighVulnerabilitiesInProd: true
+  semgrep:
+    blockErrorFindings: true
+    
