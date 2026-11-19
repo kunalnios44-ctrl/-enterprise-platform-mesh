@@ -1,0 +1,21 @@
+apiVersion: platform.security.io/v1alpha1
+kind: OidcRbacGuardrails
+metadata:
+  name: global-platform-oidc-rbac-guardrails
+spec:
+  oidc:
+    shortLivedTokensOnly: true
+    staticCloudSecretsForbidden: true
+    trustedProviders:
+      - aws-iam-oidc
+      - azure-entra-workload-id
+      - gcp-workload-identity-federation
+  iamAndRbac:
+    leastPrivilegeDefault: true
+    wildcardPermissionsAllowed: false
+    namespaceScopedBindings: true
+  supplyChainVerification:
+    staticAnalysis: semgrep
+    vulnerabilityScanner: trivy
+    artifactSigning: cosign
+    
