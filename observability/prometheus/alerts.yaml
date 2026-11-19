@@ -1,0 +1,23 @@
+groups:
+  - name: platform-observability-alerts
+    rules:
+      - alert: OtelCollectorTargetDown
+        expr: up{job="otel-collector-metrics"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          layer: observability
+        annotations:
+          summary: "OpenTelemetry Collector metrics endpoint is down"
+          description: "Prometheus has not scraped otel-collector-metrics for more than 1 minute."
+
+      - alert: PrometheusTargetDown
+        expr: up{job="prometheus"} == 0
+        for: 1m
+        labels:
+          severity: warning
+          layer: observability
+        annotations:
+          summary: "Prometheus self-scrape target is down"
+          description: "Prometheus self-monitoring target has been unreachable for more than 1 minute."
+          
