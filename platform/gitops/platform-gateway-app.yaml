@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: platform-gateway
+  namespace: gitops-system
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/kunalnios44-ctrl/global-platform-engineering.git
+    targetRevision: main
+    path: platform/charts/platform-gateway
+    helm:
+      valueFiles:
+        - values.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: platform-gateway
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      
