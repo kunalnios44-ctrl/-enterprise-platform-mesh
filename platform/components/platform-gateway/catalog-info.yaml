@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: platform-gateway
+  title: Platform Ingress & GitOps Gateway
+  description: Standardized platform entry point integrating Kubernetes workloads, GitOps delivery, and zero-trust controls.
+  tags:
+    - platform
+    - kubernetes
+    - gitops
+spec:
+  type: service
+  lifecycle: production
+  owner: platform-engineering
+  system: global-platform-core
+  
