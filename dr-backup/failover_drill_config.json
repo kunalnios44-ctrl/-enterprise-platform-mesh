@@ -1,0 +1,15 @@
+{
+  "drillSuite": "global-platform-dr-failover-drill",
+  "verificationEngine": "python",
+  "containerRuntime": "docker",
+  "checks": [
+    "snapshot_integrity",
+    "rpo_compliance",
+    "rto_readiness"
+  ],
+  "targetClouds": [
+    "aws",
+    "azure",
+    "gcp"
+  ]
+}
