@@ -1,0 +1,11 @@
+serviceAccount:
+  create: true
+  name: platform-gateway-sa
+
+rbac:
+  create: true
+  rules:
+    - apiGroups: [""]
+      resources: ["configmaps", "services"]
+      verbs: ["get", "list", "watch"]
+      
