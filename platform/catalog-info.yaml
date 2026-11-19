@@ -1,0 +1,12 @@
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: global-platform-core
+  title: Global Platform Core
+  description: Multi-cloud enterprise platform layer spanning Kubernetes, GitOps, security gates, and observability.
+  annotations:
+    github.com/project-slug: kunalnios44-ctrl/global-platform-engineering
+spec:
+  owner: platform-engineering
+  domain: enterprise-platform
+  
