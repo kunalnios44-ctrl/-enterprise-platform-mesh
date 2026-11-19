@@ -1,0 +1,6 @@
+apiVersion: v2
+name: platform-gateway
+description: Helm chart for Platform Gateway with least-privilege Kubernetes RBAC
+type: application
+version: 0.1.0
+appVersion: "1.0.0"
