@@ -1,0 +1,19 @@
+apiVersion: platform.mesh/v1alpha1
+kind: ZeroTrustPolicy
+metadata:
+  name: global-security-and-oidc-baseline
+spec:
+  identity:
+    authMethod: OIDC
+    leastPrivilegeIAM: true
+    rbacEnforced: true
+  codeAndImageSecurity:
+    sastScanner: Semgrep
+    vulnerabilityScanner: Trivy
+    artifactSigning: Cosign
+    failOnCritical: true
+  targets:
+    - EKS
+    - AKS
+    - GKE
+    
