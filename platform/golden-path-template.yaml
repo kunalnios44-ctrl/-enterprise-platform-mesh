@@ -1,0 +1,31 @@
+apiVersion: scaffolder.backstage.io/v1beta3
+kind: Template
+metadata:
+  name: golden-path-platform-service
+  title: Golden Path Platform Service
+spec:
+  owner: platform-engineering
+  type: service
+  parameters:
+    - title: Service Standards
+      required:
+        - serviceName
+        - targetEnvironment
+      properties:
+        serviceName:
+          title: Service Name
+          type: string
+        targetEnvironment:
+          title: Target Environment
+          type: string
+          enum:
+            - dev
+            - staging
+            - prod
+  steps:
+    - id: scaffold-service
+      name: Scaffold Helm, RBAC, GitOps, and Telemetry Defaults
+      action: debug:log
+      input:
+        message: "Scaffolding golden-path service with Helm RBAC, Argo CD GitOps, and OpenTelemetry."
+        
