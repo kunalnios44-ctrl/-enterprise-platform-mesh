@@ -8,7 +8,7 @@ An end-to-end **Platform Engineering & DevSecOps architecture** demonstrating mu
 
 ## ✈️ Open to On-Site Relocation (Nordic Region)
 
-I am actively seeking **On-Site Senior Platform Engineer / DevSecOps / Cloud Infrastructure** roles with **Relocation & Work Visa Sponsorship** in the Nordic region.
+I am actively seeking **On-Site  Platform Engineer / DevSecOps / Cloud Infrastructure** roles with **Relocation & Work Visa Sponsorship** in the Nordic region.
 * **Target Countries (On-Site Only):** 🇩🇰 **Denmark** | 🇸🇪 **Sweden** | 🇫🇮 **Finland**
 * **Direct Contact:** 📧 `kunalnios44@gmail.com`
 
