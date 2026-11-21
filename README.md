@@ -1,7 +1,8 @@
 # 🛡️ Enterprise Platform Mesh & Guardrail Engine
 
-Target 🎯 📊 Denmark sweden Finland 
-🇫🇮🇪🇺🇸🇪🇩🇰 MY DREAM 💻🖥️✅ 
+[Target 🎯 📊 Denmark sweden Finland 
+🇫🇮🇪🇺🇸🇪🇩🇰 MY DREAM 💻]
+
 A production-grade **Internal Developer Platform (IDP) & Infrastructure Guardrail Framework** built for multi-cloud resilience, zero-trust governance, and deterministic infrastructure validation. 
 
 This system enforces strict policy-as-code guardrails, bounded execution limits, secretless OIDC authentication, and automated drift remediation before any infrastructure change is promoted to production.
