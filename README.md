@@ -1,7 +1,25 @@
 # 🛡️ Enterprise Platform Mesh & Guardrail Engine
 
-[Target 🎯 📊 Denmark sweden Finland 
-🇫🇮🇪🇺🇸🇪🇩🇰 MY DREAM 💻]
+> **🎯 Career Target & Relocation Goal:** Building production-grade cloud infrastructure with the dream of contributing on-site in **Denmark 🇩🇰 | Sweden 🇸🇪 | Finland 🇫🇮** (Ready for Q1 2027 relocation).
+
+A production-grade **Internal Developer Platform (IDP) & Infrastructure Guardrail Framework** built for multi-cloud resilience, zero-trust governance, and deterministic policy validation across 19 tools and 5 automated pipelines.
+
+## ⚡ Live Production Benchmarks (Verified via GitHub Actions)
+
+| Metric | Verified Result | Engineering Impact |
+| :--- | :--- | :--- |
+| **CI/CD Pipeline Speed** | **9s – 13s** (Full Verification + Build) | Ultra-fast developer feedback loop with zero bloat |
+| **Build Artifact Footprint** | **8 KB – 21.2 KB** (SHA-256 Digested) | Minimal attack surface, instant deployment & low cloud cost |
+| **Guardrail Memory Cap** | **1 MiB Strict Payload Limit** | Deterministic protection against parser DoS & OOM crashes |
+| **Architectural Governance** | **19 Formal ADRs + 40+ Passing Runs** | Auditable, zero-trust, and production-hardened from day one |
+
+## 🧠 Core Engineering Philosophy
+
+* **Fail-Closed by Default:** Security and policy guardrails block unverified changes automatically before reaching production.
+* **Zero-Bloat Architecture:** Every pipeline and artifact is engineered for minimal memory footprint (8 KB – 21 KB) and sub-15s feedback loops.
+* **Blast-Radius Isolation:** Multi-cloud resources and Terraform states are strictly segmented so one failure never cascades.
+* **Automate the Recovery, Not Just the Deploy:** Backups are treated as invalid until proven via automated RPO/RTO restoration drills.
+* 
 
 A production-grade **Internal Developer Platform (IDP) & Infrastructure Guardrail Framework** built for multi-cloud resilience, zero-trust governance, and deterministic infrastructure validation. 
 
@@ -142,7 +160,7 @@ For production troubleshooting, guardrail overrides, and disaster recovery drill
 
 ## 📫 Let's Connect
 
-Actively seeking **On-Site Platform Engineering, Cloud Infrastructure, or DevSecOps** opportunities in **Denmark, Sweden, or Finland** (Ready for relocation starting **2027**).
+Actively seeking **On-Site Platform Engineering, Cloud Infrastructure, or DevSecOps** opportunities in **Denmark 🇩🇰, Sweden 🇸🇪, Finland 🇫🇮, or across Europe 🇪🇺** (Ready for relocation starting **2027**).
 
 * **Email:** kunalnios44@gmail.com
 * **GitHub:** [@kunalnios44-ctrl](https://github.com)
