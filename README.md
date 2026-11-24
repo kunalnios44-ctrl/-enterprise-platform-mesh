@@ -1,6 +1,5 @@
 # 🛡️ Enterprise Platform Mesh & Guardrail Engine
-
-> **🎯 Career Target & Relocation Goal:** Building production-grade cloud infrastructure with the dream of contributing on-site in **Denmark 🇩🇰 | Sweden 🇸🇪 | Finland 🇫🇮** (Ready for Q1 2027 relocation).
+Career Target & Relocation: Open to Immediate Technical Interviews for On-Site Platform Engineering / DevSecOps roles in Denmark 🇩🇰 | Sweden 🇸🇪 | Finland 🇫🇮 (Targeting Dec 2026 Offer & Spring/May 2027 Onboarding).
 
 A production-grade **Internal Developer Platform (IDP) & Infrastructure Guardrail Framework** built for multi-cloud resilience, zero-trust governance, and deterministic policy validation across 19 tools and 5 automated pipelines.
 
@@ -160,7 +159,7 @@ For production troubleshooting, guardrail overrides, and disaster recovery drill
 
 ## 📫 Let's Connect
 
-Actively seeking **On-Site Platform Engineering, Cloud Infrastructure, or DevSecOps** opportunities in **Denmark 🇩🇰, Sweden 🇸🇪, Finland 🇫🇮, or across Europe 🇪🇺** (Ready for relocation starting **2027**).
+Actively interviewing now for On-Site Platform Engineering, Cloud Infrastructure, or DevSecOps roles in Denmark 🇩🇰, Sweden 🇸🇪, Finland 🇫🇮, or across Europe 🇪🇺 — available for immediate technical rounds, aiming to finalize an offer before Dec 20, 2026, with visa filing in Feb 2027 and on-site joining in May 2027
 
 * **Email:** kunalnios44@gmail.com
 * **GitHub:** [@kunalnios44-ctrl](https://github.com)
