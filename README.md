@@ -1,5 +1,7 @@
-# 🛡️ Enterprise Platform Mesh & Guardrail Engine
-Career Target & Relocation: Open to Immediate Technical Interviews for On-Site Platform Engineering / DevSecOps roles in Denmark 🇩🇰 | Sweden 🇸🇪 | Finland 🇫🇮 (Targeting Dec 2026 Offer & Spring/May 2027 Onboarding).
+# 🛡 Enterprise Platform Mesh & Guardrail Engine
+
+**🎯 Active Status & Relocation:** **Actively Interviewing Now** (Available on Short Notice) for On-Site Platform Engineering / DevSecOps roles in **Denmark 🇩🇰 | Sweden 🇸🇪 | Finland 🇫🇮** (**Ready to Sign Offer Right Away** | **Feb 2027 Visa Filing** & **May 2027 Onboarding**).
+
 
 A production-grade **Internal Developer Platform (IDP) & Infrastructure Guardrail Framework** built for multi-cloud resilience, zero-trust governance, and deterministic policy validation across 19 tools and 5 automated pipelines.
 
@@ -156,10 +158,13 @@ For production troubleshooting, guardrail overrides, and disaster recovery drill
 * `docs/runbook-guardrail-operations.md` — Step-by-step incident & failure recovery procedures
 
 ---
-
 ## 📫 Let's Connect
 
-Actively interviewing now for On-Site Platform Engineering, Cloud Infrastructure, or DevSecOps roles in Denmark 🇩🇰, Sweden 🇸🇪, Finland 🇫🇮, or across Europe 🇪🇺 — available for immediate technical rounds, aiming to finalize an offer before Dec 20, 2026, with visa filing in Feb 2027 and on-site joining in May 2027
+Actively interviewing **now** for **On-Site Platform Engineering, Cloud Infrastructure, or DevSecOps** roles in **Denmark 🇩🇰, Sweden 🇸🇪, Finland 🇫🇮, or across Europe 🇪🇺** — available for **immediate technical interviews on short notice** and ready to sign an offer right away, aligning with **February 2027 visa filing** and **May 2027 on-site onboarding**.
+
+- **Email:** kunalnios44@gmail.com
+- **GitHub:** @kunalnios44-ctrl
+- 
 
 * **Email:** kunalnios44@gmail.com
 * **GitHub:** [@kunalnios44-ctrl](https://github.com)
