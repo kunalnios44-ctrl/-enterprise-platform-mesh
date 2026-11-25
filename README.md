@@ -1,4 +1,5 @@
-# 🛡 Enterprise Platform Mesh & Guardrail Engine
+# **Platform Engineer | AI Infrastructure & DevSecOps**
+
 
 **🎯 Active Status & Relocation:** **Actively Interviewing Now** (Available on Short Notice) for On-Site Platform Engineering / DevSecOps roles in **Denmark 🇩🇰 | Sweden 🇸🇪 | Finland 🇫🇮** (**Ready to Sign Offer Right Away** | **Feb 2027 Visa Filing** & **May 2027 Onboarding**).
 
