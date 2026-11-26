@@ -1,0 +1,64 @@
+name: Payment Core DevSecOps Verification
+
+on:
+  push:
+    branches: [ "main" ]
+    paths:
+      - "apps/payment-core/**"
+      - ".github/workflows/payment-core-devsecops.yml"
+  pull_request:
+    branches: [ "main" ]
+    paths:
+      - "apps/payment-core/**"
+
+permissions:
+  contents: read
+
+jobs:
+  verify-and-scan:
+    name: Pytest, SAST (Bandit), SCA (pip-audit) & Docker Runtime Check
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/payment-core
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+          cache-dependency-path: apps/payment-core/requirements.txt
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run Automated Security & Concurrency Tests (Pytest)
+        run: pytest -v
+
+      - name: Run Static Application Security Testing (Bandit SAST)
+        run: bandit -r main.py -ll
+
+      - name: Run Dependency Vulnerability Scan (pip-audit SCA)
+        run: pip-audit -r requirements.txt
+
+      - name: Build Hardened Docker Image
+        run: docker build -t payment-core:verified .
+
+      - name: Verify Live Container Startup & /health Endpoint (With Retry Loop)
+        run: |
+          docker run -d --name payment-core-smoke \
+            -e PAYMENT_API_KEY="ci-smoke-test-secret-key" \
+            -e SERVER_REGION="eu-north-1" \
+            -p 8000:8000 payment-core:verified
+          curl -f --retry 10 --retry-delay 1 --retry-connrefused http://localhost:8000/health
+
+      - name: Cleanup Smoke Test Container
+        if: always()
+        run: docker rm -f payment-core-smoke || true
+        
