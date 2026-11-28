@@ -20,122 +20,241 @@
 · [Backup & DR Verification](https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
 · [Payment Core DevSecOps](https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
 
-</div>
+</div>)
+Enterprise Platform Mesh
 
+A cloud-native platform engineering project focused on Kubernetes security, infrastructure automation, workload resilience, and operational verification.
 
----
+This repository brings together platform guardrails, application security, CI/CD automation, observability, disaster recovery, and eBPF-based network resilience.
 
-## Overview
+Project Overview
 
-A practical platform engineering repository built around automated delivery, policy guardrails, workload security, observability, disaster recovery, and a security-hardened payment API prototype. Every pipeline executes automated tests, SAST/SCA scans, policy checks, and container validations.
+The project contains the following engineering areas:
 
----
+- Kubernetes runtime guardrails
+- Zero Trust policy enforcement
+- Admission webhook
+- Go-based platform agent and controller
+- eBPF network resilience
+- Terraform infrastructure configuration
+- CI/CD and supply-chain verification
+- Container signing and GitOps
+- Multi-cloud observability
+- Backup and disaster recovery
+- Payment Core application
 
-## Architecture
+Architecture
 
-```text
-                    ┌─────────────────────────┐
-                    │       GitHub PR/Push    │
-                    └────────────┬────────────┘
-                                 │
-                                 ▼
-                    ┌─────────────────────────┐
-                    │   CI/CD Security Gates  │
-                    │  Tests • SAST • SCA     │
-                    │  Policy • Containers    │
-                    └────────────┬────────────┘
-                                 │
-               ┌─────────────────┼─────────────────┐
-               ▼                 ▼                 ▼
-        ┌─────────────┐  ┌──────────────┐  ┌──────────────┐
-        │   Platform  │  │   Security   │  │  Guardrails  │
-        │ K8s + Helm  │  │ Zero Trust   │  │ Policy Engine│
-        └──────┬──────┘  └──────┬───────┘  └──────┬───────┘
-               │                 │                 │
-               └─────────────────┼─────────────────┘
-                                 ▼
-                    ┌─────────────────────────┐
-                    │      Payment Core       │
-                    │      (FastAPI App)      │
-                    └────────────┬────────────┘
-                                 │
-               ┌─────────────────┼─────────────────┐
-               ▼                 ▼                 ▼
-        ┌─────────────┐  ┌──────────────┐  ┌──────────────┐
-        │Observability│  │ Backup / DR  │  │ Multi-Cloud  │
-        │ Metrics/Logs│  │ Verification │  │ Terraform    │
-        └─────────────┘  └──────────────┘  └──────────────┘
-```
+flowchart TD
+    A[Developer Changes] --> B[GitHub Actions]
+    B --> C[CI Verification]
+    C --> D[Security and Policy Gates]
+    D --> E[Platform Guardrails]
+    E --> F[Kubernetes Workloads]
+    F --> G[Platform Agent]
+    G --> H[eBPF Network Controls]
+    F --> I[Observability]
+    I --> J[Operational Verification]
+    J --> K[Resilience and Recovery]
+    L[Terraform] --> E
+    M[Payment Core] --> F
 
----
+Repository Structure
 
-## Repository Structure
-
-```text
 enterprise-platform-mesh/
-├── .github/workflows/       # 6 CI/CD & verification pipelines
-├── apps/payment-core/       # FastAPI payment prototype, tests & Dockerfile
-├── docs/                    # Architecture Decision Records (ADR-001 to ADR-019)
-├── dr-backup/               # Backup & disaster recovery verification scripts
-├── infra/                   # Multi-cloud Terraform configurations
-├── observability/           # Metrics, telemetry, and logging configs
-├── platform/                # Kubernetes & Helm deployment charts
-├── platform-guardrail/      # Go-based policy enforcement engine
-├── security/                # Zero-trust policies & Kyverno admission rules
-└── tools/                   # Automated verification utilities
-```
+├── .github/
+│   └── workflows/
+├── apps/
+│   └── payment-core/
+├── bpf/
+│   └── chaos_tc.c
+├── cmd/
+│   └── agent/
+├── deploy/
+├── dr-backup/
+├── infra/
+├── internal/
+├── observability/
+├── platform/
+├── platform-guardrail/
+├── security/
+├── tools/
+└── README.md
 
----
+Platform Guardrails
 
-## Payment Core Controls (`apps/payment-core`)
+The platform guardrail implementation covers:
 
-| Control | Implementation |
-| :--- | :--- |
-| **Secrets** | Mandatory `PAYMENT_API_KEY` (fail-fast startup check) |
-| **Monetary Math** | Python `Decimal` (`0.00 < amount <= 10000.00`) |
-| **IBAN Validation** | ISO-13616 Mod-97 checksum verification |
-| **Region Enforcement** | EU server-side allowlist |
-| **Idempotency** | Persistent SQLite unique constraints & collision handling |
-| **Container** | Slim Python image running as non-root user + `/health` check |
-| **Security & Tests** | Pytest, Bandit (SAST), and `pip-audit` (SCA) |
+- Policy validation
+- Terraform plan verification
+- SLO evaluation
+- Rollout validation
+- Kubernetes runtime policies
+- OIDC and RBAC controls
+- Zero Trust configuration
+- Configuration drift controls
 
----
+Chaos Resilience and eBPF
 
-## CI/CD Pipelines (`.github/workflows`)
+The repository includes a Linux eBPF Traffic Control program.
 
-| Workflow File | Purpose |
-| :--- | :--- |
-| `platform-guardrail-ci.yml` | Runs Go guardrail tests and policy checks |
-| `ci-zero-trust-gate.yml` | Enforces zero-trust security rules |
-| `container-signing-gitops.yml` | Container signing and GitOps manifest validation |
-| `multi-cloud-observability.yml` | Validates metrics and logging configurations |
-| `backup-dr-verification.yml` | Executes backup integrity and recovery tests |
-| `payment-core-devsecops.yml` | Runs Pytest, Bandit, `pip-audit`, and Docker smoke tests |
+"bpf/chaos_tc.c" implements network packet inspection and policy-based packet manipulation.
 
----
+Implemented areas include:
 
-## Local Verification
+- TC egress processing
+- IPv4 and TCP inspection
+- Destination-port policy lookup
+- Configurable packet-drop behaviour
+- TCP control-flag protection
+- Policy statistics
 
-```bash
-# 1. Navigate to payment-core
-cd apps/payment-core
+The agent and controller provide supporting components for managing resilience policies.
 
-# 2. Run unit & concurrency tests
-PAYMENT_API_KEY="local-test-key" pytest -v
+Kubernetes
 
-# 3. Run security & dependency scans
-bandit -r main.py -ll
-pip-audit -r requirements.txt
+Kubernetes-related engineering includes:
 
-# 4. Start the API locally (Swagger UI available at /docs)
-PAYMENT_API_KEY="local-test-key" SERVER_REGION="eu-north-1" uvicorn main:app --host 0.0.0.0 --port 8000
-```
+- Runtime guardrail manifests
+- Admission webhook
+- Service account configuration
+- Namespace security boundaries
+- Policy enforcement
+- Chaos resilience agent deployment
 
----
+Security and Supply Chain
 
-## Scope & Maintainer
+Security-related components cover:
 
-> **Note:** This repository is an engineering prototype built to practice platform automation, security controls, and recovery verification. It is not a live banking or regulated payment system.
+- Zero Trust gates
+- Container signing
+- Supply-chain attestations
+- Secretless authentication design
+- Least-privilege access
+- Dependency verification
+- Artifact integrity
+- Admission policies
 
-**Kunal Kashyap** — [@kunalnios44-ctrl](https://github.com/kunalnios44-ctrl)
-emial ✉️ kunalnios44@gmail.com
+Infrastructure
+
+Terraform and automation support infrastructure configuration and verification.
+
+The repository also includes work around multi-cloud infrastructure controls and deployment configuration.
+
+Payment Core
+
+"apps/payment-core" is the application workload used to exercise platform security and delivery controls.
+
+Its documented areas include:
+
+- Payment processing
+- Idempotency
+- Monetary value handling
+- IBAN validation
+- EU region restrictions
+- Application testing
+- Container security
+
+Observability and Disaster Recovery
+
+Observability configuration includes:
+
+- Prometheus
+- Grafana
+- OpenTelemetry Collector
+- Telemetry sampling guardrails
+- SLO verification
+
+Disaster recovery work covers backup verification, recovery objectives, and operational readiness checks.
+
+CI/CD
+
+GitHub Actions workflows cover:
+
+- Platform verification
+- Zero Trust checks
+- Container signing and GitOps
+- Multi-cloud observability
+- Backup and disaster recovery
+- Payment Core security
+- Repository verification
+
+Workflow results are available under the repository's Actions tab.
+
+"View GitHub Actions" (https://github.com/kunalnios44-ctrl/enterprise-platform-mesh/actions)
+
+Architecture Decision Records
+
+The repository contains ADR-001 through ADR-019 documenting decisions around:
+
+- Guardrail validation
+- Zero Trust supply chain
+- Disaster recovery and SLOs
+- CI verification
+- Multi-cloud infrastructure
+- Failure isolation
+- Release promotion
+- Telemetry and auditability
+- Secretless authentication
+- Immutable artifacts
+- Progressive delivery
+- Capacity management
+- Dependency hygiene
+- Incident response
+- Configuration management
+- Least-privilege IAM and RBAC
+
+Technology Stack
+
+Technology| Purpose
+Python| Automation, policy checks and testing
+Go| Agent and platform components
+HCL| Terraform configuration
+C| eBPF network processing
+Docker| Containerization
+Kubernetes| Workload orchestration
+GitHub Actions| CI/CD
+Prometheus| Metrics
+Grafana| Monitoring
+OpenTelemetry| Telemetry
+
+GitHub Language Distribution
+
+Language| Share
+Python| 57%
+Go| 25.8%
+HCL| 11.7%
+C| 4.4%
+Dockerfile| 1.1%
+
+Distribution reported by GitHub. Percentages represent repository language composition, not test coverage.
+
+Validation
+
+The repository includes automated workflows and component-specific tests.
+
+Basic Git checks:
+
+git status
+git diff --check
+
+Additional validation depends on the component being changed and its required tooling.
+
+Development Status
+
+This is an actively developed engineering project.
+
+Successful CI runs demonstrate that configured checks passed. Production deployment, multi-region operation, disaster recovery performance, and runtime security effectiveness require separate environment-level validation.
+
+Author
+
+Kunal Kashyap
+
+Cloud Infrastructure | Platform Engineering | DevSecOps
+
+"GitHub Profile" (https://github.com/kunalnios44-ctrl)
+
+"Project Repository" (https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
+emial.✉️kunalnios44@gmail.com
+
+
