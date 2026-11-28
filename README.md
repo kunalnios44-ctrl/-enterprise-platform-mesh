@@ -1,23 +1,24 @@
- <div align="center">
+
+<div align="center">
 
 # Enterprise Platform Mesh
 
-**Cloud Platform Engineering • DevSecOps Pipelines • Go Guardrails • Hardened Payment API**
+**Cloud Platform Engineering · DevSecOps Pipelines · Go Guardrails · Hardened Payment API**
 
-![Python](https://shields.io)
-![FastAPI](https://shields.io)
-![Go](https://shields.io)
-![Terraform](https://shields.io)
-![Kubernetes](https://shields.io)
-![Helm](https://shields.io)
-![Docker](https://shields.io)
-[![Platform Guardrail CI](https://github.com)](https://github.com)
-[![CI Zero-Trust Gate](https://github.com)](https://github.com)
-[![Container Signing GitOps](https://github.com)](https://github.com)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![Go](https://img.shields.io/badge/Go-00ADD8?style=flat-square&logo=go&logoColor=white)
+![Terraform](https://img.shields.io/badge/Terraform-844FBA?style=flat-square&logo=terraform&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/Kubernetes-326CE5?style=flat-square&logo=kubernetes&logoColor=white)
+![Helm](https://img.shields.io/badge/Helm-0F1689?style=flat-square&logo=helm&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
 
-[![Multi-Cloud Observability](https://github.com)](https://github.com)
-[![Backup & DR Verification](https://github.com)](https://github.com)
-[![Payment Core DevSecOps](https://github.com)](https://github.com)
+[Platform Guardrail CI](https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
+· [CI Zero-Trust Gate](https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
+· [Container Signing GitOps](https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
+· [Multi-Cloud Observability](https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
+· [Backup & DR Verification](https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
+· [Payment Core DevSecOps](https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
 
 </div>
 
