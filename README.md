@@ -1,44 +1,26 @@
-<div align="center">
+ <div align="center">
 
 # Enterprise Platform Mesh
 
 **Cloud Platform Engineering • DevSecOps Pipelines • Go Guardrails • Hardened Payment API**
 
-<!-- Tech Stack Badges -->
-<p>
-  <img src="https://shields.io" alt="Python" />
-  <img src="https://shields.io" alt="FastAPI" />
-  <img src="https://shields.io" alt="Go" />
-  <img src="https://shields.io" alt="Terraform" />
-  <img src="https://shields.io" alt="Kubernetes" />
-  <img src="https://shields.io" alt="Helm" />
-  <img src="https://shields.io" alt="Docker" />
-</p>
+![Python](https://shields.io)
+![FastAPI](https://shields.io)
+![Go](https://shields.io)
+![Terraform](https://shields.io)
+![Kubernetes](https://shields.io)
+![Helm](https://shields.io)
+![Docker](https://shields.io)
+[![Platform Guardrail CI](https://github.com)](https://github.com)
+[![CI Zero-Trust Gate](https://github.com)](https://github.com)
+[![Container Signing GitOps](https://github.com)](https://github.com)
 
-<!-- Live GitHub Actions Workflow Badges -->
-<p>
-  <a href="https://github.com">
-    <img src="https://github.com/badge.svg" alt="Platform Guardrail CI" />
-  </a>
-  <a href="https://github.com">
-    <img src="https://github.com/badge.svg" alt="CI Zero-Trust Gate" />
-  </a>
-  <a href="https://github.com">
-    <img src="https://github.com/badge.svg" alt="Container Signing GitOps" />
-  </a>
-  <br />
-  <a href="https://github.com">
-    <img src="https://github.com/badge.svg" alt="Multi-Cloud Observability" />
-  </a>
-  <a href="https://github.com">
-    <img src="https://github.com/badge.svg" alt="Backup & DR Verification" />
-  </a>
-  <a href="https://github.com">
-    <img src="https://github.com/badge.svg" alt="Payment Core DevSecOps" />
-  </a>
-</p>
+[![Multi-Cloud Observability](https://github.com)](https://github.com)
+[![Backup & DR Verification](https://github.com)](https://github.com)
+[![Payment Core DevSecOps](https://github.com)](https://github.com)
 
 </div>
+
 
 ---
 
@@ -155,3 +137,4 @@ PAYMENT_API_KEY="local-test-key" SERVER_REGION="eu-north-1" uvicorn main:app --h
 > **Note:** This repository is an engineering prototype built to practice platform automation, security controls, and recovery verification. It is not a live banking or regulated payment system.
 
 **Kunal Kashyap** — [@kunalnios44-ctrl](https://github.com/kunalnios44-ctrl)
+emial ✉️ kunalnios44@gmail.com
