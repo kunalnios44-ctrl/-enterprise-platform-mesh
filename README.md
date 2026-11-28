@@ -255,6 +255,8 @@ Cloud Infrastructure | Platform Engineering | DevSecOps
 "GitHub Profile" (https://github.com/kunalnios44-ctrl)
 
 "Project Repository" (https://github.com/kunalnios44-ctrl/enterprise-platform-mesh)
-emial.✉️kunalnios44@gmail.com
+
+emial,✉️kunalnios44@gmail.com 
+
 
 
