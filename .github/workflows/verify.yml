@@ -1,0 +1,114 @@
+name: Chaos Resilience Verification
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+permissions:
+  contents: read
+
+jobs:
+  verify-system:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: "1.22"
+          cache: true
+
+      - name: Install eBPF build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            clang \
+            llvm \
+            libbpf-dev \
+            linux-headers-$(uname -r)
+
+      - name: Compile eBPF TC program
+        run: |
+          mkdir -p bpf
+          clang \
+            -O2 \
+            -g \
+            -target bpf \
+            -I/usr/include/$(uname -m)-linux-gnu \
+            -c bpf/chaos_tc.c \
+            -o bpf/chaos_tc.o
+
+      - name: Verify Go dependencies
+        run: |
+          go mod tidy
+          git diff --exit-code -- go.mod go.sum
+
+      - name: Run Go static analysis
+        run: |
+          go vet ./...
+
+      - name: Run Go race tests
+        run: |
+          go test -race ./...
+
+      - name: Build chaos agent
+        run: |
+          mkdir -p bin
+          CGO_ENABLED=0 \
+          GOOS=linux \
+          GOARCH=amd64 \
+          go build \
+            -trimpath \
+            -ldflags="-s -w" \
+            -o bin/chaos-agent \
+            ./cmd/agent
+
+      - name: Verify chaos agent binary
+        run: |
+          test -x bin/chaos-agent
+          file bin/chaos-agent
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "1.8.0"
+
+      - name: Validate Terraform formatting
+        working-directory: deploy/terraform
+        run: |
+          terraform fmt -check -recursive
+
+      - name: Initialize Terraform
+        working-directory: deploy/terraform
+        run: |
+          terraform init -backend=false
+
+      - name: Validate Terraform configuration
+        working-directory: deploy/terraform
+        run: |
+          terraform validate
+
+      - name: Install kubeconform
+        run: |
+          go install github.com/yannh/kubeconform/cmd/kubeconform@v0.6.7
+          echo "$(go env GOPATH)/bin" >> "$GITHUB_PATH"
+
+      - name: Validate Kubernetes manifests
+        run: |
+          kubeconform \
+            -strict \
+            -ignore-missing-schemas \
+            -summary \
+            deploy/k8s-guardrail.yaml
+
+      - name: Final verification
+        run: |
+          test -f bpf/chaos_tc.o
+          test -x bin/chaos-agent
+          test -f deploy/k8s-guardrail.yaml
+          echo "Chaos resilience verification completed successfully."
