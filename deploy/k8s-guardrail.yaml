@@ -1,0 +1,210 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: platform-guardrail
+  labels:
+    pod-security.kubernetes.io/enforce: privileged
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: chaos-agent
+  namespace: platform-guardrail
+---
+# Bootstrap self-signed issuer
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: chaos-selfsigned-issuer
+  namespace: platform-guardrail
+spec:
+  selfSigned: {}
+---
+# Internal CA certificate
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: chaos-webhook-ca
+  namespace: platform-guardrail
+spec:
+  secretName: chaos-webhook-ca
+  duration: 8760h
+  renewBefore: 720h
+  isCA: true
+  commonName: chaos-webhook-ca
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  issuerRef:
+    name: chaos-selfsigned-issuer
+    kind: Issuer
+---
+# Issuer backed by the generated CA
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: chaos-ca-issuer
+  namespace: platform-guardrail
+spec:
+  ca:
+    secretName: chaos-webhook-ca
+---
+# Webhook serving certificate
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: chaos-webhook-cert
+  namespace: platform-guardrail
+spec:
+  secretName: chaos-webhook-tls
+  duration: 2160h
+  renewBefore: 360h
+  dnsNames:
+    - chaos-webhook-svc
+    - chaos-webhook-svc.platform-guardrail
+    - chaos-webhook-svc.platform-guardrail.svc
+    - chaos-webhook-svc.platform-guardrail.svc.cluster.local
+  privateKey:
+    algorithm: RSA
+    size: 2048
+  issuerRef:
+    name: chaos-ca-issuer
+    kind: Issuer
+---
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: chaos-resilience-agent
+  namespace: platform-guardrail
+  labels:
+    app: chaos-resilience-agent
+    tier: control-plane
+spec:
+  selector:
+    matchLabels:
+      app: chaos-resilience-agent
+  template:
+    metadata:
+      labels:
+        app: chaos-resilience-agent
+        tier: control-plane
+    spec:
+      serviceAccountName: chaos-agent
+      hostNetwork: true
+
+      containers:
+        - name: agent
+          image: ghcr.io/kunalnios44-ctrl/chaos-resilience-agent:v1.0.0
+          imagePullPolicy: IfNotPresent
+
+          args:
+            - "--iface=eth0"
+            - "--bpf-obj=/opt/chaos/chaos_tc.o"
+            - "--listen=:8443"
+            - "--tls-cert=/certs/tls.crt"
+            - "--tls-key=/certs/tls.key"
+
+          ports:
+            - containerPort: 8443
+              name: webhook
+              protocol: TCP
+
+          securityContext:
+            privileged: false
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities:
+              drop:
+                - ALL
+              add:
+                - BPF
+                - NET_ADMIN
+                - SYS_RESOURCE
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "64Mi"
+            limits:
+              cpu: "500m"
+              memory: "256Mi"
+
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8443
+              scheme: HTTPS
+            initialDelaySeconds: 5
+            periodSeconds: 10
+
+          volumeMounts:
+            - name: webhook-certs
+              mountPath: /certs
+              readOnly: true
+
+            - name: bpffs
+              mountPath: /sys/fs/bpf
+
+      volumes:
+        - name: webhook-certs
+          secret:
+            secretName: chaos-webhook-tls
+
+        - name: bpffs
+          hostPath:
+            path: /sys/fs/bpf
+            type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: chaos-webhook-svc
+  namespace: platform-guardrail
+spec:
+  selector:
+    app: chaos-resilience-agent
+  ports:
+    - port: 443
+      targetPort: 8443
+      protocol: TCP
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: platform-pod-guardrail
+  annotations:
+    cert-manager.io/inject-ca-from: platform-guardrail/chaos-webhook-ca
+webhooks:
+  - name: guardrail.platform.mesh.io
+    admissionReviewVersions:
+      - v1
+
+    sideEffects: None
+    timeoutSeconds: 5
+    failurePolicy: Fail
+
+    namespaceSelector:
+      matchExpressions:
+        - key: kubernetes.io/metadata.name
+          operator: NotIn
+          values:
+            - platform-guardrail
+
+    rules:
+      - apiGroups:
+          - ""
+        apiVersions:
+          - v1
+        operations:
+          - CREATE
+          - UPDATE
+        resources:
+          - pods
+        scope: Namespaced
+
+    clientConfig:
+      service:
+        name: chaos-webhook-svc
+        namespace: platform-guardrail
+        path: /validate
+        port: 443
